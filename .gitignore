@@ -34,3 +34,7 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# Front end shizz
+app/lib
+!app/lib/angular-socket-io
