@@ -8,6 +8,6 @@ setup(name='orbitfm',
       description='Collabrtive playlist for parties',
       author='Enalicho',
       author_email='enalicho@gmail.com',
-      packages = ['orbitfm'],
-      requires=['tornado'],
+      packages = find_packages(),
+      requires=['tornado', 'xmltodict', 'pafy', 'requests'],
      )
