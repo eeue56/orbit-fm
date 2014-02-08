@@ -6,7 +6,6 @@ import tornado.web
 import logging
 
 
-
 class WSHandler(tornado.websocket.WebSocketHandler):
     def open(self):
         logging.info('User joined!')
@@ -17,14 +16,16 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     def on_close(self):
         logging.info('User disconnected!')
 
+
 application = tornado.web.Application([
     (r"/ws", WSHandler),  
 ])
 
+
 if __name__ == '__main__':
     logging.basicConfig(filename='server.log', 
         level=logging.DEBUG,  
-        format="%(asctime)s; %(levelname)s; %(message)")
+        format="%(asctime)s; %(levelname)s; %(message)s")
 
     logging.info("================\nStarting program")
 
