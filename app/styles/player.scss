@@ -1,0 +1,64 @@
+@import 'theme';
+@import 'mixins';
+
+.track.status {
+  background-color:$theme-foreground;
+  
+  .meta {
+    font-size:14pt;
+    text-align:center;
+    margin:4px 0;
+    
+    .name {
+      color:$theme-text;
+      margin:10px 0;
+    }
+    
+    .artist {
+      font-weight:200;
+      color:$theme-text;
+      margin:10px 0;
+    }
+
+  }
+}
+
+.times {
+  padding:0 10px;
+}
+
+table.track.list {
+  @include reset;
+  width:100%;
+  border:0;
+  border-spacing:0px;
+  border-collapse:separate;
+   
+  thead {
+    border-bottom:solid 1px $theme-border;
+    border-top:solid 1px $theme-border;
+    background-color:$theme-background;
+    
+    td { 
+      color:$theme-text; 
+    }
+  }
+
+  tbody {
+    tr {
+      background-color:$theme-foreground;
+    }
+    
+    tr:nth-child(even) {
+      background-color:$theme-light;
+    }
+
+    td {
+      border-right:solid 1px $theme-divider;
+    }
+  }
+
+  td {
+    color:$theme-text;
+  }
+}

@@ -6,19 +6,109 @@
   
   <title>Orbit FM - Collaborative Radio</title>
   <!-- Styles -->
-  <link rel="stylesheet" href="lib/foundation/foundation.css">
+  <link rel="stylesheet" href="lib/foundation/css/foundation.css">
   <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
   <link rel="stylesheet" href="bin/styles/global.css">
+  <link rel="stylesheet" href="bin/styles/logo.css">
+  <link rel="stylesheet" href="bin/styles/player.css">
   <!-- Scripts -->
   <script src='lib/angular/angular.js'></script>
-  <script src='lib/angular/angular-route.js'></script>
+  <script src='lib/angular-route/angular-route.js'></script>
   <script src='bin/index.js'></script>
 
 
 </head>
 <body>
   <div>
+    
+    <!-- Top Navigation Bar -->
+    <div class='top bar'>
+      <input type='text' placeholder='Search for music...'
+        class='dark input music search'></input>
+       <button class='small'>
+        <i class='fa fa-search'></i>
+       </button>
+    </div>
+  
+    <!-- Artwork/Logo space -->
+    <div class='album space'>
+
+      <!-- Background logo --> 
+      <div class='logo background'>
+        <div class='outer circle'>
+          <div class='inner circle'></div>
+        </div>
+        <h1>orbit</h1>
+      </div>
       
+      <!-- Album artwork  -->
+      <div class='album artwork'>
+        
+      </div>
+
+    </div>
+
+    <!-- Track Status and Queue  -->
+    <div class='content space'>
+      <div class='track status'>
+
+        <!-- Progress Bar -->
+        <div class='track progress'>
+          <div class='current progress'></div>
+        </div>
+
+        <!-- Start/Stop times -->
+        <div class='times'>
+          <label class='left'>0:00</label>
+          <label class='right'>0:00</label>
+        </div>
+
+        <!-- Metadata -->
+        <div class='meta'>
+          <div class='name'>
+            Invaders Must Die
+            <i class='fa fa-speaker'></i>
+          </div>
+          <div class='artist'>The Prodigy</div>
+        </div>
+        
+        <table class='track list'>
+          <thead>
+            <tr>
+              <td>Title</td>
+              <td>Artist</td>
+              <td>Length</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Invaders Must Die</td>
+              <td>The Prodigy</td>
+              <td>4:03</td>
+            </tr>   <tr>
+              <td>Invaders Must Die</td>
+              <td>The Prodigy</td>
+              <td>4:03</td>
+            </tr>
+          <tr>
+              <td>Invaders Must Die</td>
+              <td>The Prodigy</td>
+              <td>4:03</td>
+            </tr>
+          
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+    
+    <!-- Options bar -->
+    <div class='bottom bar'>
+      <button>
+        <i class='fa fa-list'></i>
+      </button>  
+    </div>
+
   </div>
 </body>
 </html>

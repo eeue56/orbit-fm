@@ -1,0 +1,30 @@
+@import 'theme';
+@import 'mixins';
+@import 'ui';
+
+html, body {
+  background-color:$theme-background;
+}
+
+.top.bar {
+  border-bottom:solid 1px $theme-border;
+  position:relative;
+  padding-right:50px;
+
+  .search.music {
+    margin:0; 
+  }
+
+  button {
+    position:absolute;
+    right:9px;
+    top:9px;
+    padding:11px;
+  }
+}
+
+.bottom.bar {
+  position:absolute;
+  bottom:0;
+  background-color:$theme-background;
+}

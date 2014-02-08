@@ -21,11 +21,11 @@ module.exports = function(grunt) {
     },
     watch: {
       sass: {
-        files: ['./styles/**/*.scss'],
+        files: ['./styles/**.scss'],
         tasks: ['sass']
       },
       js: {
-        files: ['./src/**/*.js'],
+        files: ['./src/**.js'],
         tasks: ['browserify']
       }
     }

@@ -1,0 +1,40 @@
+@import 'mixins';
+@import 'theme';
+
+input {
+  background-color:$theme-background !important;
+  color:$theme-text !important;
+  border:none !important;
+  border-radius:4px;
+}
+
+button {
+  background-color:$theme-foreground !important;
+  border:solid 1px $theme-border-light;
+  border-radius:4px;
+
+  i {
+    color:$theme-text;
+  }
+}
+
+.bar {
+  min-height:30px;
+  width:auto;
+  background-color:$theme-foreground;
+  padding:10px;
+}
+
+.progress.track {
+  @include reset;
+  height:5px;
+  background-color:$theme-light;
+  border:none;
+
+  .current.progress {
+    border:none;
+    height:100%;
+    width:40%;
+    background-color:#0c6684;
+  }
+}
