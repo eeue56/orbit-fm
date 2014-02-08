@@ -16,7 +16,6 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     def on_close(self):
         logging.info('User disconnected!')
 
-
 application = tornado.web.Application([
     (r"/ws", WSHandler),  
 ])
