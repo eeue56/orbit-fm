@@ -1,0 +1,17 @@
+/* Reset to no margin or padding */
+@mixin reset {
+  padding:0;
+  margin:0;
+}
+
+/* Make element fill parent */
+@mixin max {
+  @include 'reset'
+  height:100%;
+  width:100%;
+}
+
+/* Box win  */
+@mixin box {
+  box-sizing:border-box;
+}
