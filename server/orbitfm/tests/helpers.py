@@ -12,5 +12,6 @@ def assert_exception(func, exception, *args, **kwargs):
 def test_parse():
 
     assert parse_message('f ') == ('f', '')
-
     assert assert_exception(parse_message, IndexError, 'f')
+    assert parse_message('f f') == ('f', 'f')
+    assert parse_message('f f f f') == ('f', 'f f f')
