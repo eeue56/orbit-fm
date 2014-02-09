@@ -9,6 +9,9 @@ module.exports = function() {
         console.log(val, old);
       });
     },
+    controller: function($scope) {
+      $scope.progress = 0;
+    },
     templateUrl: 'partials/progress.html'
   }
 }

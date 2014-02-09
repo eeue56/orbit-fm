@@ -25,15 +25,39 @@
   <div>
     
     <!-- Top Navigation Bar -->
-    <div class='top bar'>
+    <div class='top bar' ng-controller='SearchController'>
       <form>
         <input type='text' placeholder='Search for music...'
-          class='dark input music search' ng-model='search'
-          ></input>
+          class='dark input music search' ng-model='criteria'
+          after-typing='search()' typing-duration='300'
+          ng-blur='blur()'></input>
         <a class='small button'>
-          <i class='fa fa-search'></i>
+          <i class='fa fa-search' ng-hide='searching'></i>
+          <i class='fa fa-refresh fa-spin' ng-show='searching'></i>
         </a>
        </form>
+       <div class='results dropdown' ng-hide='results === null'>
+         <table class='search results track list' ng-show='results && results.length'>
+          <thead>
+            <tr>
+              <td>Title</td>
+              <td>Artist</td>
+              <td>Duration</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat='result in results'>
+              <td>{{result.title}}</td>
+              <td>{{result.artist}}</td>
+              <td>{{result.duration}}</td>
+            </tr>
+          </tbody>
+         </table>
+         <div class='message' ng-show='results.length === 0'>
+          <i class='fa fa-exclamation'></i>
+          No results found
+         </div>
+       </div>
     </div>
   
     <div ng-view></div>
@@ -41,7 +65,7 @@
     <!-- Options bar -->
     <div class='bottom bar'>
       <a href='#/settings' class='button'>
-        <i class='fa fa-list'></i>
+        <i class='fa fa-gear'></i>
       </a>
       <a href='#/playlist' class='button'>
         <i class='fa fa-plus'></i>

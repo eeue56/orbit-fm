@@ -1,6 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 angular.module('app', ['ngRoute', 'btford.socket-io'])
-
+//
 .config(function($routeProvider) {
   $routeProvider
 
@@ -32,29 +32,63 @@ angular.module('app', ['ngRoute', 'btford.socket-io'])
   'playlist': require('./services/playlist'),
   'session': require('./services/session'),
   'search': require('./services/search'),
-  'eventName': require('./services/eventName')
+  'settings': require('./services/settings'),
+  'eventName': require('./services/eventName'),
+  'storage': require('./services/storage')
 })
 
 .filter({
-
+  'minutes': require('./filters/minutes'),
 })
 
-
 .controller({
-  'TestController': require('./controllers/TestController'),
   'SettingsController': require('./controllers/SettingsController'),
+  'SearchController': require('./controllers/SearchController'),
   'SessionController': require('./controllers/SessionController')
 })
 
 .directive({
-  'progress': require('./directives/progress')
+  'progress': require('./directives/progress'),
+  'afterTyping': require('./directives/afterTyping')
 });
 
-},{"./controllers/SessionController":2,"./controllers/SettingsController":3,"./controllers/TestController":4,"./directives/progress":5,"./services/eventName":6,"./services/playlist":7,"./services/search":8,"./services/session":9,"./services/socket":10}],2:[function(require,module,exports){
+},{"./controllers/SearchController":2,"./controllers/SessionController":3,"./controllers/SettingsController":4,"./directives/afterTyping":5,"./directives/progress":6,"./filters/minutes":7,"./services/eventName":8,"./services/playlist":9,"./services/search":10,"./services/session":11,"./services/settings":12,"./services/socket":13,"./services/storage":14}],2:[function(require,module,exports){
+module.exports = function($scope, search) {
+ 
+  $scope.critera = '';
+  $scope.searching = false;
+ 
+  $scope.results = null;
+  
+  $scope.blur = function() {
+    $scope.results = null;
+  };
+
+  $scope.search = function() {
+    $scope.searching = true;
+    search.for($scope.criteria);
+
+    $scope.results = [
+      {title:'Testing cars', artist: 'No Patrol', length:'49:32'},
+      {title:'Testing cars', artist: 'No Patrol', length:'49:32'},
+      {title:'Testing cars', artist: 'No Patrol', length:'49:32'}
+    ];
+  };
+
+  search.on('results', function(results) {
+    $scope.results = results;
+    $scope.searching = false;
+  });
+
+  
+}
+
+},{}],3:[function(require,module,exports){
 module.exports = function($scope) {
 
   $scope.current = {};
   $scope.time = '0:00';
+  $scope.progress = 0;
 
   $scope.songs = [{
     title: 'AngularJS',
@@ -75,21 +109,61 @@ module.exports = function($scope) {
 
 }
 
-},{}],3:[function(require,module,exports){
-module.exports = function($scope) {
-  
-}
-
 },{}],4:[function(require,module,exports){
-module.exports = function($scope, session) {
-  console.log('loaded');  
-  $scope.add = function(uri) {
-    session.add(uri);
-  }
+module.exports = function($scope, $timeout, settings) {
+  
+  $scope.saving = false;
+  $scope.name = settings.get('name');
+  
+  $scope.save = function() {
+    $scope.saving = true;
+    settings.set('name', $scope.name);
+    $timeout(function() {
+      $scope.saving = false;
+    }, 1000)
+  };
 
 }
 
 },{}],5:[function(require,module,exports){
+
+// after-typing
+// ------------
+
+// Provides two attributes that can be used 
+// to fire events after a given duration of
+// time after a user has stopped typing.
+//
+// @after-typing    
+// The code to be evaluated when the event is fired.
+//
+// @typing-duration 
+// The duration after which to fire the event.
+// Defaults to 1000ms.
+
+module.exports = function($parse, $timeout) {
+  return {
+    restrict: 'A',
+    link: function  (scope, element, attrs) {
+      var timeout;
+      
+      element.bind('keyup', function() {
+        var delay;
+       
+        $timeout.cancel(timeout);
+        delay = attrs.typingDuration || 1000;
+        timeout = $timeout(function() {  
+          scope.$eval(attrs.afterTyping);
+        }, delay);
+      });
+      
+    }
+  };
+};
+
+  
+
+},{}],6:[function(require,module,exports){
 module.exports = function() {
   return {
     restrict: 'A',
@@ -101,11 +175,34 @@ module.exports = function() {
         console.log(val, old);
       });
     },
+    controller: function($scope) {
+      $scope.progress = 0;
+    },
     templateUrl: 'partials/progress.html'
   }
 }
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
+// Turns milliseconds into minute measurements
+
+module.exports = function() {
+  return function(_seconds) {    
+    var minutes, seconds;
+    
+    if(typeof _seconds !== 'undefined' || isNaN(_seconds)) {
+      return '00:00';
+    }
+
+    minutes = Math.floor(_seconds / 60);
+    seconds = Math.floor(((_seconds / 60) - minutes) * 60);
+
+    seconds = seconds > 9 ? seconds : '0' + seconds;
+
+    return minutes + ':' + seconds;
+  }
+}
+
+},{}],8:[function(require,module,exports){
 module.exports = function() {
   return function(name, events) {
     var names, event, i;
@@ -115,10 +212,12 @@ module.exports = function() {
       event = events[i];
       names[event] = name + ' ' + event;
     }
+
+    return names;
   }
 }
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports = function(socket, eventName) {
   
   var event = eventName('playlist', ['get', 'add', 'remove']);
@@ -181,10 +280,26 @@ module.exports = function(socket, eventName) {
   }
 }
 
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports = function(socket) {
   
-  var results = [];
+  var events = {};
+  
+  function on(event, fn) {
+    if(!(events[event] instanceof Array)) {
+      events[event] = [];
+    }
+    
+    events[event].push(fn);
+  }
+
+  function trigger(event, data) {
+    if(events[event] instanceof Array) {
+      for(var i = 0; i < events[event].length; i++) {
+        events[event][i](data);
+      }
+    }
+  }
 
   function search(string) {
     socket.emit('search ' + string);
@@ -192,17 +307,18 @@ module.exports = function(socket) {
 
   function populate(tracks) {
     results.concat(tracks);
+    trigger('result', tracks);
   }
  
   socket.on('search', populate);
 
   return {
-    results: results,
+    on: on,
     for: search
   }
 }
 
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports = function(socket, eventName) {
   
   var event = eventName('session', [
@@ -282,9 +398,98 @@ module.exports = function(socket, eventName) {
   }
 }
 
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
+module.exports = function(storage) {
+  var settings = storage('orbit-settings');
+  
+  return {
+    get: settings.get,
+    set: settings.set,
+  };
+}
+
+},{}],13:[function(require,module,exports){
 module.exports = function(socketFactory) {
   return socketFactory();
 }
+
+},{}],14:[function(require,module,exports){
+
+// Storage Factory
+// ---------------
+
+// Provides localStorage support with a cookie
+// based fallback. 
+
+module.exports = function() {
+  return function(id) {
+    var cache, storage;
+    
+    storage = which();
+
+    // Determines which type of storage
+    // is available and returns a jQuery
+    // style getter/setter for it's value.
+    function which() {
+      if(window.localStorage) {
+        return function(data) {
+          if(typeof data === 'undefined') {
+            return localStorage[id];
+          } else {
+            localStorage[id] = data;
+          }
+        }
+      } else {
+        return function(data) {
+          if(typeof data === 'undefined') {
+            return document.cookie;
+          } else {
+            document.cookie = data;
+          }
+        }
+      }
+    }
+
+    // Load the contents from whichever
+    // storage is avaiable. If JSON parse
+    // throws an exception, then the value
+    // was undefined, so instead cache an
+    // empty object.
+    function load() {
+      try {
+        cache = JSON.parse(storage());
+      } catch(e) {
+        cache = {};
+      }
+      return cache;
+    }
+
+    // Save the contents of the cache
+    // into storage
+    function save() {
+      storage(JSON.stringify(cache));
+    }
+
+    // Set a value within the cache
+    // based on a key and then save it.
+    function set(key, value) {
+      if(!cache) load();
+      cache[key] = value;
+      save();
+    }
+
+    // Get a value from the cache
+    function get(key) {
+      if(!cache) load();
+      return cache[key];
+    } 
+
+    // Expose get and set methods
+    return {
+      get: get,
+      set: set
+    }
+  }
+};
 
 },{}]},{},[1])

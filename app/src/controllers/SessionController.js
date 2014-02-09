@@ -2,6 +2,7 @@ module.exports = function($scope) {
 
   $scope.current = {};
   $scope.time = '0:00';
+  $scope.progress = 0;
 
   $scope.songs = [{
     title: 'AngularJS',

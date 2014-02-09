@@ -35,3 +35,14 @@ html, body {
 .scrollable {
   overflow-y:auto;
 }
+
+.results.dropdown {
+  z-index:10;
+  position:absolute;
+  top:100%;
+  left:0;
+  box-sizing:border-box;
+  background-color:$theme-foreground;
+  width:100%;
+  padding:4px;
+}

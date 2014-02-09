@@ -7,5 +7,7 @@ module.exports = function() {
       event = events[i];
       names[event] = name + ' ' + event;
     }
+
+    return names;
   }
 }

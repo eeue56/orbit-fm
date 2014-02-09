@@ -1,5 +1,5 @@
 angular.module('app', ['ngRoute', 'btford.socket-io'])
-
+//
 .config(function($routeProvider) {
   $routeProvider
 
@@ -31,20 +31,22 @@ angular.module('app', ['ngRoute', 'btford.socket-io'])
   'playlist': require('./services/playlist'),
   'session': require('./services/session'),
   'search': require('./services/search'),
-  'eventName': require('./services/eventName')
+  'settings': require('./services/settings'),
+  'eventName': require('./services/eventName'),
+  'storage': require('./services/storage')
 })
 
 .filter({
-
+  'minutes': require('./filters/minutes'),
 })
 
-
 .controller({
-  'TestController': require('./controllers/TestController'),
   'SettingsController': require('./controllers/SettingsController'),
+  'SearchController': require('./controllers/SearchController'),
   'SessionController': require('./controllers/SessionController')
 })
 
 .directive({
-  'progress': require('./directives/progress')
+  'progress': require('./directives/progress'),
+  'afterTyping': require('./directives/afterTyping')
 });

@@ -56,18 +56,3 @@ $text-color:#094c64;
   }
 }
 
-@-webkit-keyframes rotate {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to { 
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-.logo .outer.circle:hover {
-  -webkit-animation-name:rotate; 
-  -webkit-animation-duration:3s; 
-  -webkit-animation-iteration-count:infinite;
-  -webkit-animation-timing-function:linear;
-}

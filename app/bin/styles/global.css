@@ -53,6 +53,9 @@ button:active {
   border-bottom: solid 1px #3c3c3c;
   margin: 12px 0; }
 
+.message {
+  color: #aaaaaa; }
+
 html, body {
   background-color: #393939;
   font-family: 'Raleway', sans-serif; }
@@ -78,3 +81,13 @@ html, body {
 
 .scrollable {
   overflow-y: auto; }
+
+.results.dropdown {
+  z-index: 10;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  box-sizing: border-box;
+  background-color: #393939;
+  width: 100%;
+  padding: 4px; }
