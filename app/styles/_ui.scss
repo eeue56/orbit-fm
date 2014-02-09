@@ -9,7 +9,7 @@ input {
 }
 
 input:focus {
-  box-shadow:none;
+  box-shadow:none !important;
 }
 
 button, .button {

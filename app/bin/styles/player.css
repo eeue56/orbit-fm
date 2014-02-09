@@ -22,6 +22,8 @@
 
 .times {
   padding: 0 10px; }
+  .times label {
+    color: #848484; }
 
 table.track.list {
   padding: 0;

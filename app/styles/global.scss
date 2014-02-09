@@ -45,4 +45,6 @@ html, body {
   background-color:$theme-foreground;
   width:100%;
   padding:4px;
+  border:solid 1px $theme-border;
+  border-top:none;
 }

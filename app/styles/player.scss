@@ -30,6 +30,10 @@
 }
 
 .times {
+  label {
+    color:$theme-text-dark;
+  }
+
   padding:0 10px;
 }
 

@@ -11,7 +11,7 @@ input {
   border-radius: 4px; }
 
 input:focus {
-  box-shadow: none; }
+  box-shadow: none !important; }
 
 button, .button {
   box-sizing: border-box;
@@ -90,4 +90,6 @@ html, body {
   box-sizing: border-box;
   background-color: #393939;
   width: 100%;
-  padding: 4px; }
+  padding: 4px;
+  border: solid 1px #262626;
+  border-top: none; }
