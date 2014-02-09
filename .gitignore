@@ -16,6 +16,7 @@ sdist
 develop-eggs
 .installed.cfg
 lib
+!app/lib
 lib64
 __pycache__
 
@@ -35,6 +36,4 @@ nosetests.xml
 .project
 .pydevproject
 
-# Front end shizz
-app/lib
-!app/lib/angular-socket-io
+

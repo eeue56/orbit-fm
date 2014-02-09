@@ -1,0 +1,49 @@
+/* Reset to no margin or padding */
+/* Make element fill parent */
+/* Box win  */
+.album.space {
+  background-color: #2a2a2a;
+  padding: 20px 0; }
+
+.track.status {
+  background-color: #393939; }
+  .track.status .meta {
+    font-size: 14pt;
+    text-align: center;
+    margin: 4px 0; }
+    .track.status .meta .name {
+      color: #aaaaaa;
+      font-weight: semibold;
+      margin: 10px 0; }
+    .track.status .meta .artist {
+      font-weight: 200;
+      color: #aaaaaa;
+      margin: 10px 0; }
+
+.times {
+  padding: 0 10px; }
+
+table.track.list {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border: 0;
+  border-spacing: 0px;
+  border-collapse: separate; }
+  table.track.list thead {
+    border-bottom: solid 1px #262626;
+    border-top: solid 1px #262626;
+    background-color: #2a2a2a; }
+    table.track.list thead td {
+      color: #aaaaaa; }
+  table.track.list tbody tr {
+    background-color: #393939; }
+  table.track.list tbody tr:nth-child(even) {
+    background-color: #414141; }
+  table.track.list tbody tr:hover {
+    cursor: pointer;
+    background-color: #444; }
+  table.track.list tbody td {
+    border-right: solid 1px #353535; }
+  table.track.list td {
+    color: #aaaaaa; }
