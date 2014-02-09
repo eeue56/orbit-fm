@@ -13,8 +13,8 @@ module.exports = function(){
             source : video
         })
         .toFormat('mp3')
-        .writeToStream(res, function(code, error){
-            if error throw error;
+        .writeToStream(res, function(error, code){
+            if(error) throw error;
             console.log('file has been converted succesfully', code);
         });
     };
