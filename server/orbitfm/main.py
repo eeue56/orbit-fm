@@ -20,10 +20,29 @@ class SocketIoHandler(tornadio.conn.SocketConnection):
         #tornadio.SocketConnection.on_message(self, message)
 
     @tornadio.event('session.add')
-    def add(self, message):
-        print(message)
+    def add(self, uri):
+        print(uri)
         self.emit("add", {"hello" : "hello"})
 
+    @tornadio.event('session.join')
+    def add(self, message):
+        print(message)
+        self.emit("join", {"hello" : "hello"})
+
+    @tornadio.event('session.quit')
+    def add(self, message):
+        print(message)
+        self.emit("quit", {"hello" : "hello"})
+
+    @tornadio.event('session.search')
+    def add(self, words)
+        print(message)
+        self.emit("search", {"hello" : "hello"})
+
+    @tornadio.event('session.get')
+    def add(self, url_id)
+        print(message)
+        self.emit("get", {"hello" : "hello"})
 
 
 SocketIoRouter = tornadio.router.TornadioRouter(SocketIoHandler)
