@@ -329,10 +329,11 @@ module.exports = function(socket, eventName) {
   return function(id) {
     
     var songs = [];
-   
+       
     // get tracks for this queue
     function get() {
-      socket.emit(event.get);
+      console.log('Request response');
+      socket.emit(event.get, id);
     }
 
     // Called when a track is added
@@ -371,6 +372,7 @@ module.exports = function(socket, eventName) {
     });
 
     socket.on(event.get, function(tracks) {
+      console.log('Here is response');
       songs.concat(tracks);
     });
 
@@ -388,6 +390,8 @@ module.exports = function(socket, eventName) {
         }
       }
     });
+
+    get();
 
     return {
       songs: songs,
