@@ -7,6 +7,7 @@ module.exports = function(socket, eventName) {
   return function(id) {
     
     var songs = [];
+    var events = {};
        
     // get tracks for this queue
     function get() {
@@ -29,6 +30,21 @@ module.exports = function(socket, eventName) {
       return songs[0];
     }
 
+    function on(event, fn) {
+      if(!(events[event] instanceof Array)) {
+        events[event] = [];
+      }
+      events[event].push(fn);
+    }
+
+    function trigger(event, data) {
+      if(events[event] instanceof Array) {
+        for(var i = 0; i < events[event].length; i++) {
+          events[event][i](data);
+        }
+      }
+    }
+
     // remove the current song 
     socket.on(event.next, function() {
       songs.shift();
@@ -37,6 +53,7 @@ module.exports = function(socket, eventName) {
     // pause the current song
     socket.on(event.pause, function() {
       current().playing = false;
+      
     });
 
     // 
@@ -50,23 +67,19 @@ module.exports = function(socket, eventName) {
     });
 
     socket.on(event.get, function(tracks) {
+      trigger('get', tracks);
       console.log('Here is response');
       songs.concat(tracks);
     });
 
 
     socket.on(event.add, function(track) {
+      trigger('add', track);
       songs.push(track);
     });
 
     socket.on(event.remove, function(id) {
-      var i;
-      for(i = 0; i < songs.length; i++) {
-        if(songs[i].id === id) {
-          songs.splice(i, 1);
-          break;
-        }
-      }
+      trigger('remove', id); 
     });
 
     get();
@@ -76,6 +89,7 @@ module.exports = function(socket, eventName) {
       get: get,
       add: add,
       remove: remove,
+      on: on,
       current: current
     }
   }
