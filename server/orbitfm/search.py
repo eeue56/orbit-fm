@@ -15,19 +15,21 @@ class MagicSource(object):
         for k, v in kwargs.items():
             self.__dict__[k] = v 
 
-    
+    def get_details(self):
+            self.artist = track['artist_name']
+	    self.title = track['title']
+            self.duration = track['audio_summary']['duration']*1000
+            self.id = track['tracks'][0]['foreign_id'].replace('-WW', '')
 
+def search(words, results, artist=None, track=None):
 
-
-
-def search(words, artist=None, track=None, album=None):
-
-    if all(x is None for x in (artist, track, album)):
+    if all(x is None for x in (artist, track)):
         return []
 
     params = {
         "combined" : words,
-        "results" : 10,
+        "results" : results,
+	"bucket" : ["id:spotify-WW", "tracks", "audio_summary"],
         "limit" : True,
     }
 
@@ -37,12 +39,7 @@ def search(words, artist=None, track=None, album=None):
     if track is not None:
         params["track"] = track
 
-    if album is not None:
-        params["album"] = album
-
-
-    #TODO: replace playlist static
-    response = pyen.get('playlist/static', **params)
+    response = pyen.get('song/search', **params)
 
     songs = response['songs']
 
