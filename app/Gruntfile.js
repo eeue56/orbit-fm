@@ -9,23 +9,25 @@ module.exports = function(grunt) {
           src: ['*.scss'],
           dest: './bin/styles',
           ext: '.css'
-        }]
+        }],
+        debug: true
       } 
     },
     browserify: {
       dist: {
         files: {
           'bin/index.js': ['src/app.js']
-        }
+        },
+        debug:true
       }
     },
     watch: {
       sass: {
-        files: ['./styles/**.scss'],
+        files: ['./styles/**/*.scss'],
         tasks: ['sass']
       },
       js: {
-        files: ['./src/**.js'],
+        files: ['./src/**/*.js'],
         tasks: ['browserify']
       }
     }

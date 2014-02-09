@@ -4,11 +4,15 @@
 input {
   background-color:$theme-background !important;
   color:$theme-text !important;
-  border:none !important;
+  border:solid 1px $theme-border !important;
   border-radius:4px;
 }
 
-button {
+input:focus {
+  box-shadow:none;
+}
+
+button, .button {
   box-sizing:border-box;
   background-color:$theme-foreground !important;
   border:solid 1px $theme-border;
@@ -52,4 +56,9 @@ button:active {
     width:40%;
     background-color:#0c6684;
   }
+}
+
+.divider {
+  border-bottom:solid 1px #3c3c3c;
+  margin:12px 0;
 }

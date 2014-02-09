@@ -1,0 +1,60 @@
+<!-- Artwork/Logo space -->
+<div class='album space'>
+
+  <!-- Background logo --> 
+  <div class='logo background'>
+    <div class='outer circle'>
+      <div class='inner circle'></div>
+    </div>
+    <h1>orbit</h1>
+  </div>
+  
+  <!-- Album artwork  -->
+  <div class='album artwork'>
+    
+  </div>
+
+</div>
+
+<!-- Track Status and Queue  -->
+<div class='content space scrollable'>
+  <div class='track status'>
+
+    <div progress='{{progress}}'></div>
+
+    <!-- Start/Stop times -->
+    <div class='times'>
+      <label class='left'>{{time}}</label>
+      <label class='right'>{{current.duration}}</label>
+    </div>
+
+    <!-- Metadata -->
+    <div class='meta'>
+      <div class='name'>
+        {{current.title}}
+        <i class='fa fa-volume-up' ng-show='playing'></i>
+      </div>
+      <div class='artist'>{{current.artist}}</div>
+    </div>
+  </div>
+
+  <table class="track list">
+    <thead>
+      <tr>
+        <td>Title</td>
+        <td>Artist</td>
+        <td>Length</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat='song in songs'>
+        <td class='title'>{{song.title}}</td>
+        <td class='artist'>{{song.artist}}</td>
+        <td class='duration'>{{song.duration}}</td>
+      </tr>    
+    </tbody>
+  </table>
+  <div ng-hide='songs && songs.length > 0'>
+    There are currently no songs in this queue.
+  </div>
+</div>

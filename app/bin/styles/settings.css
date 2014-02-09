@@ -1,0 +1,14 @@
+/* Reset to no margin or padding */
+/* Make element fill parent */
+/* Box win  */
+.settings {
+  background-color: #414141;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  border: solid 1px #2f2f2f; }
+  .settings h1 {
+    font-size: 20pt;
+    font-weight: 300; }
+  .settings input {
+    margin: 0; }

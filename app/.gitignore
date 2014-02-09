@@ -1,5 +1,5 @@
 !bin
-lib/*
-!lib/angular-socket-io
+lib/**/*
+!lib/angular-socket-io/
 node_modules
 .sass-cache

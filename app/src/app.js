@@ -4,9 +4,14 @@ angular.module('app', ['ngRoute', 'btford.socket-io'])
   $routeProvider
 
   // User joining to add music
-  .when('/:session_id', {
-    templateUrl: 'partials/play.html',
+  .when('/play/:session_id', {
+    templateUrl: 'partials/session.html',
     controller: 'SessionController'
+  })
+
+  .when('/settings', {
+    templateUrl: 'partials/settings.html',
+    controller: 'SettingsController'
   })
 
   // DJ joining to moderate
@@ -14,17 +19,9 @@ angular.module('app', ['ngRoute', 'btford.socket-io'])
     templateUrl: 'partials/play.html',
     controller: 'DjController'
   })
-
-  // Publically available playlist URL
-  .when('/playlist/share/:public_url', {
-    templateUrl: 'partials/playlist.html',
-    controller: 'PlaylistController'
-  })
-
-  // Privately available playlist URL
-  .when('/playlist/edit/:private_url', {
-    templateUrl: 'partials/playlist.html',
-    controller: 'PlaylistEditController'
+  
+  .otherwise({
+    redirectTo: '/about'
   });
 
 })
@@ -43,10 +40,11 @@ angular.module('app', ['ngRoute', 'btford.socket-io'])
 
 
 .controller({
-  'TestController': require('./controllers/TestController')
+  'TestController': require('./controllers/TestController'),
+  'SettingsController': require('./controllers/SettingsController'),
+  'SessionController': require('./controllers/SessionController')
 })
 
 .directive({
-
+  'progress': require('./directives/progress')
 });
-

@@ -5,9 +5,14 @@ angular.module('app', ['ngRoute', 'btford.socket-io'])
   $routeProvider
 
   // User joining to add music
-  .when('/:session_id', {
-    templateUrl: 'partials/play.html',
+  .when('/play/:session_id', {
+    templateUrl: 'partials/session.html',
     controller: 'SessionController'
+  })
+
+  .when('/settings', {
+    templateUrl: 'partials/settings.html',
+    controller: 'SettingsController'
   })
 
   // DJ joining to moderate
@@ -15,17 +20,9 @@ angular.module('app', ['ngRoute', 'btford.socket-io'])
     templateUrl: 'partials/play.html',
     controller: 'DjController'
   })
-
-  // Publically available playlist URL
-  .when('/playlist/share/:public_url', {
-    templateUrl: 'partials/playlist.html',
-    controller: 'PlaylistController'
-  })
-
-  // Privately available playlist URL
-  .when('/playlist/edit/:private_url', {
-    templateUrl: 'partials/playlist.html',
-    controller: 'PlaylistEditController'
+  
+  .otherwise({
+    redirectTo: '/about'
   });
 
 })
@@ -44,15 +41,46 @@ angular.module('app', ['ngRoute', 'btford.socket-io'])
 
 
 .controller({
-  'TestController': require('./controllers/TestController')
+  'TestController': require('./controllers/TestController'),
+  'SettingsController': require('./controllers/SettingsController'),
+  'SessionController': require('./controllers/SessionController')
 })
 
 .directive({
-
+  'progress': require('./directives/progress')
 });
 
+},{"./controllers/SessionController":2,"./controllers/SettingsController":3,"./controllers/TestController":4,"./directives/progress":5,"./services/eventName":6,"./services/playlist":7,"./services/search":8,"./services/session":9,"./services/socket":10}],2:[function(require,module,exports){
+module.exports = function($scope) {
 
-},{"./controllers/TestController":2,"./services/eventName":3,"./services/playlist":4,"./services/search":5,"./services/session":6,"./services/socket":7}],2:[function(require,module,exports){
+  $scope.current = {};
+  $scope.time = '0:00';
+
+  $scope.songs = [{
+    title: 'AngularJS',
+    artist: 'Brian Ford',
+    duration: '4:05'
+  },
+  {
+    title: 'Bonfire',
+    artist: 'Knife Party',
+    duration:'3:06'
+  }];
+
+  function next() {
+    $scope.current = $scope.songs.shift();
+  }
+
+  next();
+
+}
+
+},{}],3:[function(require,module,exports){
+module.exports = function($scope) {
+  
+}
+
+},{}],4:[function(require,module,exports){
 module.exports = function($scope, session) {
   console.log('loaded');  
   $scope.add = function(uri) {
@@ -61,7 +89,23 @@ module.exports = function($scope, session) {
 
 }
 
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
+module.exports = function() {
+  return {
+    restrict: 'A',
+    scope: {
+      progress: '='
+    },
+    link: function($scope, element, attrs) {
+      $scope.$watch('progress', function(val, old) {
+        console.log(val, old);
+      });
+    },
+    templateUrl: 'partials/progress.html'
+  }
+}
+
+},{}],6:[function(require,module,exports){
 module.exports = function() {
   return function(name, events) {
     var names, event, i;
@@ -74,7 +118,7 @@ module.exports = function() {
   }
 }
 
-},{}],4:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports = function(socket, eventName) {
   
   var event = eventName('playlist', ['get', 'add', 'remove']);
@@ -137,7 +181,7 @@ module.exports = function(socket, eventName) {
   }
 }
 
-},{}],5:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 module.exports = function(socket) {
   
   var results = [];
@@ -158,7 +202,7 @@ module.exports = function(socket) {
   }
 }
 
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports = function(socket, eventName) {
   
   var event = eventName('session', [
@@ -238,7 +282,7 @@ module.exports = function(socket, eventName) {
   }
 }
 
-},{}],7:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports = function(socketFactory) {
   return socketFactory();
 }

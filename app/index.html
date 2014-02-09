@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="bin/styles/global.css">
   <link rel="stylesheet" href="bin/styles/logo.css">
   <link rel="stylesheet" href="bin/styles/player.css">
+  <link rel="stylesheet" href="bin/styles/settings.css">
   <!-- Scripts -->
   <script src='lib/angular/angular.js'></script>
   <script src='lib/angular-route/angular-route.js'></script>
@@ -27,90 +28,24 @@
     <div class='top bar'>
       <form>
         <input type='text' placeholder='Search for music...'
-          class='dark input music search'></input>
-        <button class='small'>
-        <i class='fa fa-search'></i>
-        </button>
+          class='dark input music search' ng-model='search'
+          ></input>
+        <a class='small button'>
+          <i class='fa fa-search'></i>
+        </a>
        </form>
     </div>
   
-    <!-- Artwork/Logo space -->
-    <div class='album space'>
+    <div ng-view></div>
 
-      <!-- Background logo --> 
-      <div class='logo background'>
-        <div class='outer circle'>
-          <div class='inner circle'></div>
-        </div>
-        <h1>orbit</h1>
-      </div>
-      
-      <!-- Album artwork  -->
-      <div class='album artwork'>
-        
-      </div>
-
-    </div>
-
-    <!-- Track Status and Queue  -->
-    <div class='content space scrollable'>
-      <div class='track status'>
-
-        <!-- Progress Bar -->
-        <div class='track progress'>
-          <div class='current progress'></div>
-        </div>
-
-        <!-- Start/Stop times -->
-        <div class='times'>
-          <label class='left'>0:00</label>
-          <label class='right'>0:00</label>
-        </div>
-
-        <!-- Metadata -->
-        <div class='meta'>
-          <div class='name'>
-            Invaders Must Die
-            <i class='fa fa-volume-up'></i>
-          </div>
-          <div class='artist'>The Prodigy</div>
-        </div>
-        
-        <table class='track list'>
-          <thead>
-            <tr>
-              <td>Title</td>
-              <td>Artist</td>
-              <td>Length</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Invaders Must Die</td>
-              <td>The Prodigy</td>
-              <td>4:03</td>
-            </tr>   <tr>
-              <td>Invaders Must Die</td>
-              <td>The Prodigy</td>
-              <td>4:03</td>
-            </tr>
-          <tr>
-              <td>Invaders Must Die</td>
-              <td>The Prodigy</td>
-              <td>4:03</td>
-            </tr>
-          
-          </tbody>
-        </table>
-
-      </div>
-    </div>
-    
     <!-- Options bar -->
-    <div class='bottom bar' ng-controller='TestController'>
-      <button ng-click='add("magic uri")'>
+    <div class='bottom bar'>
+      <a href='#/settings' class='button'>
         <i class='fa fa-list'></i>
-      </button>  
+      </a>
+      <a href='#/playlist' class='button'>
+        <i class='fa fa-plus'></i>
+      </a>  
     </div>
 
   </div>
