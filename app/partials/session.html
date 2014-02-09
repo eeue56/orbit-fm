@@ -68,7 +68,7 @@
       <tr ng-repeat='song in songs'>
         <td class='title'>{{song.title}}</td>
         <td class='artist'>{{song.artist}}</td>
-        <td class='duration'>{{song.duration}}</td>
+        <td class='duration'>{{song.duration | minutes}}</td>
       </tr>    
     </tbody>
   </table>
