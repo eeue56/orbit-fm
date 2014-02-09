@@ -2,9 +2,9 @@ var express = require('express');
     http = require('http');
     path = require('path');
 
-    spotify = require('spotify-stream');
-    soundcloud = require('soundcloud-stream');
-    youtube = require('youtube-stream');
+    spotify = require('./spotify-stream');
+    soundcloud = require('./soundcloud-stream');
+    youtube = require('./youtube-stream');
     
     app = express();
 
@@ -27,8 +27,9 @@ app.get('/soundcloud/:uri', function(req, res) {
 });
 
 app.get('/spotify/:uri', function(req, res) {
-    spotify.login();
-    spotify.playSong(req, res);
+    spotify.login(function() {
+      spotify.playSong(req, res);
+    });
 });
 
 app.get('/youtube/:uri', function(req, res) {

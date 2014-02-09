@@ -7,7 +7,7 @@ module.exports = function(){
         soundcloud.init(user, pass, '');
     };
 
-    var playSong(req, res){
+    var playSong = function(req, res){
         //TODO: make works
         var uri = req.params.uri;
 

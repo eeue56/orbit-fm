@@ -1,9 +1,9 @@
 var Spotify = require('spotify-web');
+var credentials = require('./credentials.js');
 
-
-module.exports = function() {
-    var login = function(cb, user, pass){
-        Spotify.login(user, pass, function(err, _spotify) {
+module.exports = (function() {
+    var login = function(cb){
+        Spotify.login(credentials.user, credentials.password, function(err, _spotify) {
             if(err) throw err;
             spotify = _spotify;
             if(cb) {
@@ -32,4 +32,4 @@ module.exports = function() {
         playSong : playSong,
         login : login
     };
-}
+})();
