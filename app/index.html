@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app='app'>
 <head>
   <meta charset="UTF-8">
   <link rel="icon" type="image/png" href="img/logo-64.png" />
@@ -16,8 +16,8 @@
   <script src='lib/angular/angular.js'></script>
   <script src='lib/angular-route/angular-route.js'></script>
   <script src='lib/angular-socket-io/socket.js'></script>
+  <script src='lib/socket.io-client/dist/socket.io.js'></script>
   <script src='bin/index.js'></script>
-
 
 </head>
 <body>
@@ -107,8 +107,8 @@
     </div>
     
     <!-- Options bar -->
-    <div class='bottom bar'>
-      <button>
+    <div class='bottom bar' ng-controller='TestController'>
+      <button ng-click='add("magic uri")'>
         <i class='fa fa-list'></i>
       </button>  
     </div>
