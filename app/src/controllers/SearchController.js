@@ -19,9 +19,9 @@ module.exports = function($scope, search) {
     search.for($scope.criteria);
 
     $scope.results = [
-      {title:'Testing cars', artist: 'No Patrol', length:'49:32'},
-      {title:'Testing cars', artist: 'No Patrol', length:'49:32'},
-      {title:'Testing cars', artist: 'No Patrol', length:'49:32'}
+      {title:'Mr Blue Sky', artist: 'E.L.o', length:'3:32'},
+      {title:'Blue', artist: 'BigBang', length:'2:32'},
+      {title:'Blue', artist: 'R.E.M', length:'4:32'}
     ];
   };
 
