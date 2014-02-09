@@ -1,5 +1,4 @@
 var ytdl = require('ytdl');
-var fs = require('fs');
 var ffmpeg = require('fluent-ffmpeg');
 
 module.exports = function(){
