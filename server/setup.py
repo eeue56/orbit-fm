@@ -9,5 +9,5 @@ setup(name='orbitfm',
       author='Enalicho',
       author_email='enalicho@gmail.com',
       packages = find_packages(exclude=(streams,)),
-      requires=['tornado', 'xmltodict', 'pafy', 'requests'],
+      requires=['tornado', 'xmltodict', 'pafy', 'requests', 'pyen'],
      )
