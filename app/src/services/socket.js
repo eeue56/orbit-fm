@@ -1,3 +1,6 @@
 module.exports = function(socketFactory) {
-  return socketFactory();
+  var connectUrl = "http://orbit.fm/ws/";
+  return socketFactory({
+    ioSocket: io.connect(connectUrl)
+  });
 }

@@ -5,7 +5,7 @@ module.exports = function() {
     names = {};
     for(i = 0; i < events.length; i++) {
       event = events[i];
-      names[event] = name + ' ' + event;
+      names[event] = name + '.' + event;
     }
 
     return names;

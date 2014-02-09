@@ -1,7 +1,7 @@
 module.exports = function(socket, eventName) {
   
   var event = eventName('session', [
-    'get', 'add', 'remove', 
+    'get', 'add', 'remove', 'next', 
     'progress', 'pause', 'play']);
   
   return function(id) {

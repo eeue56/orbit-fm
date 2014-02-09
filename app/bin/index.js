@@ -83,11 +83,11 @@ module.exports = function($scope, search) {
 }
 
 },{}],3:[function(require,module,exports){
-module.exports = function($scope, $routeParams) {
+module.exports = function($scope, $routeParams, session) {
   
   var id = $routeParams.id;
   // decide whether this is a public/private id
-
+  var session = session(id);
 
   $scope.current = {};
   $scope.time = '0:00';
@@ -107,8 +107,6 @@ module.exports = function($scope, $routeParams) {
   function next() {
     $scope.current = $scope.songs.shift();
   }
-
-  next();
 
 }
 
@@ -213,7 +211,7 @@ module.exports = function() {
     names = {};
     for(i = 0; i < events.length; i++) {
       event = events[i];
-      names[event] = name + ' ' + event;
+      names[event] = name + '.' + event;
     }
 
     return names;
@@ -325,7 +323,7 @@ module.exports = function(socket) {
 module.exports = function(socket, eventName) {
   
   var event = eventName('session', [
-    'get', 'add', 'remove', 
+    'get', 'add', 'remove', 'next', 
     'progress', 'pause', 'play']);
   
   return function(id) {
@@ -413,7 +411,10 @@ module.exports = function(storage) {
 
 },{}],13:[function(require,module,exports){
 module.exports = function(socketFactory) {
-  return socketFactory();
+  var connectUrl = "http://orbit.fm/ws/";
+  return socketFactory({
+    ioSocket: io.connect(connectUrl)
+  });
 }
 
 },{}],14:[function(require,module,exports){
