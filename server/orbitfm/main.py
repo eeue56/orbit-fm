@@ -8,17 +8,6 @@ import logging
 
 PORT_NUMBER = 8031
 
-class WSHandler(tornado.websocket.WebSocketHandler):
-    def open(self):
-        logging.info('User joined!')
-
-    def on_message(self, message):
-        logging.info('Message {mes} recieved'.format(mes=message))
-    
-    def on_close(self):
-        logging.info('User disconnected!')
-
-
 class SocketIoHandler(tornadio.conn.SocketConnection):
 
     def on_open(self, *args, **kwargs):

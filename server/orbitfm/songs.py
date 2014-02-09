@@ -6,5 +6,3 @@ class Songs(object):
 
     def is_within_bounds(self, duration, error=0.5):
         return duration - error < self.duration < duration + error
-
-    

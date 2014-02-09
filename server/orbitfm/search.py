@@ -8,12 +8,15 @@ class MagicSong(object):
             self.__dict__[k] = v 
 
     def get_first_track(self):
-        return MagicSource(self.tracks[0])
+        return MagicSource(**self.tracks[0])
 
 class MagicSource(object):
     def __init__(self, **kwargs):
         for k, v in kwargs.items():
             self.__dict__[k] = v 
+
+    
+
 
 
 
@@ -43,9 +46,6 @@ def search(words, artist=None, track=None, album=None):
 
     songs = response['songs']
 
-    tracks = [MagicTrack(song) for song in songs]
+    tracks = [MagicSong(**song) for song in songs]
 
-
-
-
-
+    return tracks
