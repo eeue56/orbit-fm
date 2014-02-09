@@ -4,17 +4,11 @@ angular.module('app', ['ngRoute', 'btford.socket-io'])
   $routeProvider
 
   // User joining to add music
-  .when('/play/:public_id', {
+  .when('/join/:id', {
     templateUrl: 'partials/session.html',
     controller: 'SessionController'
   })
 
-  // DJ joining to moderate
-  .when('/dj/:session_id', {
-    templateUrl: 'partials/session.html',
-    controller: 'DjController'
-  })
- 
   .when('/settings', {
     templateUrl: 'partials/settings.html',
     controller: 'SettingsController'

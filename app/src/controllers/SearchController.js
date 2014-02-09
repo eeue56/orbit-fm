@@ -10,6 +10,11 @@ module.exports = function($scope, search) {
   };
 
   $scope.search = function() {
+    if($scope.criteria.length === 0) {
+      $scope.results = null;
+      return;
+    }
+
     $scope.searching = true;
     search.for($scope.criteria);
 

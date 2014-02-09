@@ -5,17 +5,11 @@ angular.module('app', ['ngRoute', 'btford.socket-io'])
   $routeProvider
 
   // User joining to add music
-  .when('/play/:public_id', {
+  .when('/join/:id', {
     templateUrl: 'partials/session.html',
     controller: 'SessionController'
   })
 
-  // DJ joining to moderate
-  .when('/dj/:session_id', {
-    templateUrl: 'partials/session.html',
-    controller: 'DjController'
-  })
- 
   .when('/settings', {
     templateUrl: 'partials/settings.html',
     controller: 'SettingsController'
@@ -65,6 +59,11 @@ module.exports = function($scope, search) {
   };
 
   $scope.search = function() {
+    if($scope.criteria.length === 0) {
+      $scope.results = null;
+      return;
+    }
+
     $scope.searching = true;
     search.for($scope.criteria);
 
@@ -84,7 +83,11 @@ module.exports = function($scope, search) {
 }
 
 },{}],3:[function(require,module,exports){
-module.exports = function($scope) {
+module.exports = function($scope, $routeParams) {
+  
+  var id = $routeParams.id;
+  // decide whether this is a public/private id
+
 
   $scope.current = {};
   $scope.time = '0:00';

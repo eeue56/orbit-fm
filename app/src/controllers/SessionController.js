@@ -1,4 +1,8 @@
-module.exports = function($scope) {
+module.exports = function($scope, $routeParams) {
+  
+  var id = $routeParams.id;
+  // decide whether this is a public/private id
+
 
   $scope.current = {};
   $scope.time = '0:00';
