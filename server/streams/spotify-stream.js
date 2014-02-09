@@ -2,7 +2,7 @@ var Spotify = require('spotify-web');
 
 
 module.exports = function() {
-    var login = function(user, pass, cb){
+    var login = function(cb, user, pass){
         Spotify.login(user, pass, function(err, _spotify) {
             if(err) throw err;
             spotify = _spotify;
