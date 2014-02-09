@@ -8,6 +8,7 @@ module.exports = function(){
     };
 
     var playSong(req, res){
+        //TODO: make works
         var uri = req.params.uri;
 
     };
