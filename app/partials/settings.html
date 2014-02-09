@@ -1,10 +1,18 @@
 <div class='settings'>
   <h1>Settings</h1> 
   
+  <div class='divider'></div>
+  
   <div class='control'>
-    Name<input type='text' ng-model='name' after-typing='save()'></input>
+    <strong class='name'>Name</strong>
+    <input type='text' ng-model='name' after-typing='save()'></input>
+    <p class='info'>You can optionally write down your name, so that other people 
+    can see that it was you who just put that great song on.</p>
   </div>
  
+  <div class='divider'></div>
+  
+  <a href='about.html'>About orbit.fm</a>
   <div class='divider'></div>
 
   <div class='message' ng-show='saving'>

@@ -11,4 +11,6 @@
     font-size: 20pt;
     font-weight: 300; }
   .settings input {
-    margin: 0; }
+    margin: 4px; }
+  .settings .info {
+    color: #848484; }

@@ -14,7 +14,14 @@
   }
 
   input {
-    margin:0;
+    margin:4px;
+  }
+
+  .name {
+  }
+
+  .info {
+    color:$theme-text-dark;
   }
   
 }
