@@ -8,10 +8,16 @@ import logging
 
 PORT_NUMBER = 8031
 
+playlists = {
+    
+}
+
 class SocketIoHandler(tornadio.conn.SocketConnection):
 
     def on_open(self, *args, **kwargs):
         print('here')
+        playlists[self.request.uri].join(self)
+        self.playlist = playlists[self.request.uri]
         #tornadio.SocketConnection.on_open(self, *args, **kwargs)
 
     def on_message(self, message):
@@ -21,28 +27,15 @@ class SocketIoHandler(tornadio.conn.SocketConnection):
 
     @tornadio.event('session.add')
     def add(self, uri):
-        print(uri)
-        self.emit("add", {"hello" : "hello"})
-
-    @tornadio.event('session.join')
-    def add(self, message):
-        print(message)
-        self.emit("join", {"hello" : "hello"})
+        self.playlist.add_song(uri)
 
     @tornadio.event('session.quit')
-    def add(self, message):
-        print(message)
-        self.emit("quit", {"hello" : "hello"})
+    def quit(self, message):
+        self.playlist.quit(self)
 
     @tornadio.event('session.search')
-    def add(self, words)
-        print(message)
-        self.emit("search", {"hello" : "hello"})
-
-    @tornadio.event('session.get')
-    def add(self, url_id)
-        print(message)
-        self.emit("get", {"hello" : "hello"})
+    def search(self, words):
+        self.emit("test", {"test": "test"})
 
 
 SocketIoRouter = tornadio.router.TornadioRouter(SocketIoHandler)
