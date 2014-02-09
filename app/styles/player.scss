@@ -1,6 +1,11 @@
 @import 'theme';
 @import 'mixins';
 
+.album.space {
+  background-color:$theme-background;
+  padding:20px 0;
+}
+
 .track.status {
   background-color:$theme-foreground;
   
@@ -11,6 +16,7 @@
     
     .name {
       color:$theme-text;
+      font-weight:semibold;
       margin:10px 0;
     }
     
@@ -48,9 +54,14 @@ table.track.list {
     tr {
       background-color:$theme-foreground;
     }
-    
+   
     tr:nth-child(even) {
       background-color:$theme-light;
+    }
+ 
+    tr:hover {
+      cursor:pointer;
+      background-color:#444;
     }
 
     td {

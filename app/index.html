@@ -8,12 +8,14 @@
   <!-- Styles -->
   <link rel="stylesheet" href="lib/foundation/css/foundation.css">
   <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="bin/styles/fonts.css">
   <link rel="stylesheet" href="bin/styles/global.css">
   <link rel="stylesheet" href="bin/styles/logo.css">
   <link rel="stylesheet" href="bin/styles/player.css">
   <!-- Scripts -->
   <script src='lib/angular/angular.js'></script>
   <script src='lib/angular-route/angular-route.js'></script>
+  <script src='lib/angular-socket-io/socket.js'></script>
   <script src='bin/index.js'></script>
 
 
@@ -23,11 +25,13 @@
     
     <!-- Top Navigation Bar -->
     <div class='top bar'>
-      <input type='text' placeholder='Search for music...'
-        class='dark input music search'></input>
-       <button class='small'>
+      <form>
+        <input type='text' placeholder='Search for music...'
+          class='dark input music search'></input>
+        <button class='small'>
         <i class='fa fa-search'></i>
-       </button>
+        </button>
+       </form>
     </div>
   
     <!-- Artwork/Logo space -->
@@ -49,7 +53,7 @@
     </div>
 
     <!-- Track Status and Queue  -->
-    <div class='content space'>
+    <div class='content space scrollable'>
       <div class='track status'>
 
         <!-- Progress Bar -->
@@ -67,7 +71,7 @@
         <div class='meta'>
           <div class='name'>
             Invaders Must Die
-            <i class='fa fa-speaker'></i>
+            <i class='fa fa-volume-up'></i>
           </div>
           <div class='artist'>The Prodigy</div>
         </div>

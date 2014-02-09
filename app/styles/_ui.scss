@@ -9,13 +9,28 @@ input {
 }
 
 button {
+  box-sizing:border-box;
   background-color:$theme-foreground !important;
-  border:solid 1px $theme-border-light;
+  border:solid 1px $theme-border;
   border-radius:4px;
+  outline:none;
+  box-shadow:inset 0 -4px rgba(0, 0, 0, 0.1);
+  margin:0;
+  padding:20px;
 
   i {
     color:$theme-text;
   }
+
+}
+
+button:hover {
+  box-shadow:inset 0 -4px rgba(0, 0, 0, 0.1),
+             inset 0 4px rgba(255, 255, 255, 0.05);
+}
+
+button:active {
+  box-shadow:none;
 }
 
 .bar {

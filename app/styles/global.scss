@@ -3,7 +3,8 @@
 @import 'ui';
 
 html, body {
-  background-color:$theme-background;
+  background-color:$theme-foreground;
+  font-family: 'Raleway', sans-serif;
 }
 
 .top.bar {
@@ -24,7 +25,13 @@ html, body {
 }
 
 .bottom.bar {
+  border-top:solid 1px $theme-border;
   position:absolute;
   bottom:0;
+  width:100%;
   background-color:$theme-background;
+}
+
+.scrollable {
+  overflow-y:auto;
 }
