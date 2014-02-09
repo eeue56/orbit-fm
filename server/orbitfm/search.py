@@ -15,10 +15,6 @@ class MagicSource(object):
         for k, v in kwargs.items():
             self.__dict__[k] = v 
 
-    
-
-
-
 
 def search(words, artist=None, track=None, album=None):
 
