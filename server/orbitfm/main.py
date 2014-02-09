@@ -30,7 +30,7 @@ class SocketIoHandler(tornadio.conn.SocketConnection):
         self.send('hey 2')
         #tornadio.SocketConnection.on_message(self, message)
 
-    @tornadio.event
+    @tornadio.event('session.add')
     def add(self, message):
         print(message)
         self.emit("add", {"hello" : "hello"})
@@ -52,7 +52,7 @@ if __name__ == '__main__':
         format="%(asctime)s; %(levelname)s; %(message)s")
 
     logging.info("================\nStarting program")
-
+ 
 
     logging.debug("Listening on port {number}".format(number=PORT_NUMBER))
     sockio = tornadio.SocketServer(application, auto_start=False)
