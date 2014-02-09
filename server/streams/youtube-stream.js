@@ -4,7 +4,7 @@ var ffmpeg = require('fluent-ffmpeg');
 module.exports = function(){
 
     var playSong = function(req, res){
-        var url = req.params.url;
+        var uri = "https://youtube.com/watch?v=" + req.params.uri;
 
         res.contentType("mpeg");
         var video = ytdl(url);

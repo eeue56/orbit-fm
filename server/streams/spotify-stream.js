@@ -10,7 +10,7 @@ module.exports = function() {
                 cb();
             }
         });
-    }
+    };
 
     var playSong = function(req, res){
 
@@ -26,7 +26,7 @@ module.exports = function() {
             })
             .pipe(req);
         });
-    }
+    };
 
     return {
         playSong : playSong,
