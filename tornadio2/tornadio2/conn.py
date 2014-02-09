@@ -221,16 +221,14 @@ class SocketConnection(with_metaclass(EventMagicMeta, object)):
         if name in self.events:
             handler = self.events[name]
         else:
-            print('Not found?!')
+            print('Not found?!', name)
+
             print(self.events)
             print(self._events)
 
         if handler is not None:
             try:
-                if args:
-                    return handler(self, *args)
-                else:
-                    return handler(self, **kwargs)
+                return handler(self, *args, **kwargs)
             except TypeError:
                 if args:
                     logger.error(('Attempted to call event handler %s ' +

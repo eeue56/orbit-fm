@@ -402,7 +402,7 @@ class Session(sessioncontainer.SessionBase):
                 # in args
                 if len(args) == 1 and isinstance(args[0], dict):
                     # Fix for the http://bugs.python.org/issue4978 for older Python versions
-                    str_args = dict((str(x), y) for x, y in args[0].iteritems())
+                    str_args = dict((str(x), y) for x, y in args[0].items())
 
                     ack_response = conn.on_event(event['name'], kwargs=str_args)
                 else:

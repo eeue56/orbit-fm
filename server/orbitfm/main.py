@@ -8,6 +8,8 @@ import logging
 
 from playlists import Playlist
 
+from search import search
+
 PORT_NUMBER = 8031
 
 playlists = {
@@ -25,7 +27,7 @@ def require_join(func, *args, **kwargs):
     return f
 
 class SocketIoHandler(tornadio.conn.SocketConnection):
-
+#
     def on_open(self, *args, **kwargs):
         self.playlist = None
         #tornadio.SocketConnection.on_open(self, *args, **kwargs)
@@ -60,9 +62,13 @@ class SocketIoHandler(tornadio.conn.SocketConnection):
 
     #@require_join
     @tornadio.event('session.search')
-    def search(self, words):
+    def search(self, *args, **kwargs):
+
+        words = kwargs['words']
+        results = kwargs['results']
+
         print('searching')
-        self.emit("session.search", {"test": "test"})
+        self.emit("session.search", search(words, results))
 
     @tornadio.event('session.remove')
     def remove(self, uri):
